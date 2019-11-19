@@ -1,3 +1,57 @@
+const String daumHtml = """
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>주소검색</title>
+</head>
+<style>
+html,body{ margin:0; padding:0; height:100%; width:100%; }
+#full-size{
+  height: 100%;
+  width: 100%;
+  zoom: 5;
+  overflow:hidden; /* or overflow:auto; if you want scrollbars */
+}
+</style>
+<body>
+<div id="full-size"></div>
+</body>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
+<script type="text/javascript">
+    var x = 'hello';
+    try { testComplete.postMessage(x); } catch (err) {}
+
+    // 우편번호 찾기 화면을 넣을 element
+    var element_layer = document.getElementById('full-size');
+
+    daum.postcode.load(function() {
+
+      function callbackMessage(message) {
+        try { onComplete.postMessage(message); } catch(err) {}
+      }
+
+      new daum.Postcode({
+          oncomplete: function(data) {
+              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+              callbackMessage(JSON.stringify(data));
+          },
+          width : '100%',
+          height : '100%',
+          maxSuggestItems : 5,
+          alwaysShowEngAddr: false,
+          hideMapBtn: true,
+          hideEngBtn: true,
+      }).embed(element_layer);
+
+      // iframe을 넣은 element를 보이게 한다.
+      element_layer.style.display = 'block';
+    });
+
+</script>
+</html>
+""";
+
+const String jusoHtml = """
 /*
 파일명 : jusoPopup.jsp
 내  용 : 팝업API 호출 소스(jusoPopup.jsp ↔ 도로명주소 팝업API )
@@ -87,3 +141,4 @@ function init(){
 </form>
 </body>
 </html>
+""";

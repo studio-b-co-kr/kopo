@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:kopo/src/constans.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 enum SearchType { daum, juso }
@@ -12,7 +12,6 @@ enum SearchType { daum, juso }
 class Kopo extends StatefulWidget {
   static const String PATH = '/kopo';
 
-  /// Create a new Kopo
   Kopo({
     Key key,
     this.title = '주소검색',
@@ -42,46 +41,43 @@ class _KopoState extends State<Kopo> {
         iconTheme: IconThemeData().copyWith(color: Colors.black),
       ),
       body: WebView(
-        initialUrl: '',
-        javascriptMode: JavascriptMode.unrestricted,
-        javascriptChannels: Set.from([
-          JavascriptChannel(
-              name: 'onComplete',
-              onMessageReceived: (JavascriptMessage message) {
-                //This is where you receive message from
-                //javascript code and handle in Flutter/Dart
-                //like here, the message is just being printed
-                //in Run/LogCat window of android studio
-                Navigator.pop(context, message.message);
-              }),
-          JavascriptChannel(
-              name: 'testComplete',
-              onMessageReceived: (JavascriptMessage message) {
-                //This is where you receive message from
-                //javascript code and handle in Flutter/Dart
-                //like here, the message is just being printed
-                //in Run/LogCat window of android studio
-//                Navigator.pop(context, message.message);
-              })
-        ]),
-        onWebViewCreated: (WebViewController webViewController) async {
-          _controller = webViewController;
-          await _loadHtmlFromAssets(_controller);
-        },
-      ),
+          initialUrl: '',
+          javascriptMode: JavascriptMode.unrestricted,
+          javascriptChannels: Set.from([
+            JavascriptChannel(
+                name: 'onComplete',
+                onMessageReceived: (JavascriptMessage message) {
+                  //This is where you receive message from
+                  //javascript code and handle in Flutter/Dart
+                  //like here, the message is just being printed
+                  //in Run/LogCat window of android studio
+                  Navigator.pop(context, message.message);
+                }),
+            JavascriptChannel(
+                name: 'testComplete',
+                onMessageReceived: (JavascriptMessage message) {
+                  //This is where you receive message from
+                  //javascript code and handle in Flutter/Dart
+                  //like here, the message is just being printed
+                  //in Run/LogCat window of android studio
+                  print('😇 message: ${message.message}');
+//                  Navigator.pop(context, message.message);
+                })
+          ]),
+          onWebViewCreated: (WebViewController webViewController) async {
+            _controller = webViewController;
+            await _loadHtmlFromAssets(_controller);
+          }),
     );
   }
 
   Future<void> _loadHtmlFromAssets(WebViewController controller) async {
-    String path = 'assets/daum.html';
+    String htmlString = daumHtml;
     if (widget.searchType == SearchType.juso) {
-      path = 'assets/juso.html';
+      htmlString = jusoHtml;
+      htmlString.replaceAll('{apiKey}', widget.apiKey);
     }
-    String fileText = await rootBundle.loadString(path);
-    if (widget.searchType == SearchType.juso) {
-      fileText.replaceAll('{apiKey}', widget.apiKey);
-    }
-    controller.loadUrl(Uri.dataFromString(fileText,
+    controller.loadUrl(Uri.dataFromString(htmlString,
             mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
         .toString());
   }

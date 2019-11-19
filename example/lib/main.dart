@@ -25,13 +25,14 @@ class RootPage extends StatelessWidget {
       body: Center(
         child: MaterialButton(
           child: Text('find Korea Postal address'),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            String message = await Navigator.push(
               context,
               CupertinoPageRoute(
                 builder: (context) => Kopo(),
               ),
             );
+            print('message: $message');
           },
         ),
       ),

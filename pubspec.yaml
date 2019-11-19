@@ -17,6 +17,3 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  assets:
-    - assets/daum.html
-    - assets/juso.html
