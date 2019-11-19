@@ -2,7 +2,7 @@ name: kopo
 description: find Korea Postal address
 version: 0.0.1
 author: Paul Han <paul@salondecode.io>
-homepage:
+homepage: https://github.com/salondecode/kopo
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
