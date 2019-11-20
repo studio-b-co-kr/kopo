@@ -5,13 +5,25 @@ find Korea Postal address
 ![](https://salondecode.github.io/kopo/assets/kopo_video.gif)
 
 ## Getting Started
+
 You should ensure that you add the router as a dependency in your flutter project.
 ```yaml
 dependencies:
  kopo: "^0.1.0"
 ```
 
+## Setup
+
+### iOS
+Opt-in to the embedded views preview by adding a boolean property to the app's `Info.plist` file
+with the key `io.flutter.embedded_views_preview` and the value `YES`.
+```xml
+<key>io.flutter.embedded_views_preview</key>
+<true/>
+```
+
 ## Example
+
 ```dart
 MaterialButton(
   child: Text('find Korea Postal address'),

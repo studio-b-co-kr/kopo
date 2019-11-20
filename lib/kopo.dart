@@ -16,16 +16,16 @@ class Kopo extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _KopoState createState() => _KopoState();
+  KopoState createState() => KopoState();
 
   final String title;
   final Color colour;
   final String apiKey;
 }
 
-class _KopoState extends State<Kopo> {
+class KopoState extends State<Kopo> {
   WebViewController _controller;
-
+  WebViewController get controller => _controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
