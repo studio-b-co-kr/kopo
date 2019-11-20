@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kopo/kopo.dart';
@@ -15,7 +17,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RootPage extends StatelessWidget {
+class RootPage extends StatefulWidget {
+  @override
+  _RootPageState createState() => _RootPageState();
+}
+
+class _RootPageState extends State<RootPage> {
+  String addressJSON = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,17 +32,28 @@ class RootPage extends StatelessWidget {
         title: Text('Kopo Demo'),
       ),
       body: Center(
-        child: MaterialButton(
-          child: Text('find Korea Postal address'),
-          onPressed: () async {
-            String message = await Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (context) => Kopo(),
-              ),
-            );
-            print('message: $message');
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            MaterialButton(
+              child: Text('find Korea Postal address'),
+              onPressed: () async {
+                KopoModel model =
+                    KopoModel.fromJson(jsonDecode(await Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => Kopo(),
+                  ),
+                )));
+                print(model.toJson());
+                setState(() {
+                  addressJSON =
+                      '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
+                });
+              },
+            ),
+            Text('$addressJSON'),
+          ],
         ),
       ),
     );
