@@ -1,6 +1,6 @@
 name: kopo
 description: find Korea Postal address
-version: 0.0.1
+version: 0.1.0
 author: Paul Han <paul@salondecode.io>
 homepage: https://github.com/salondecode/kopo
 
