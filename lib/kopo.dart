@@ -55,7 +55,6 @@ class _KopoState extends State<Kopo> {
           ]),
           onWebViewCreated: (WebViewController webViewController) async {
             _controller = webViewController;
-//            await _loadHtmlFromAssets(_controller);
           }),
     );
   }
