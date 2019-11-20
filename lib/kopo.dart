@@ -40,8 +40,7 @@ class _KopoState extends State<Kopo> {
         iconTheme: IconThemeData().copyWith(color: Colors.black),
       ),
       body: WebView(
-          initialUrl:
-              'https://salondecode.github.io/kopo/assets/daum.html?en=1',
+          initialUrl: 'https://salondecode.github.io/kopo/assets/daum.html',
           javascriptMode: JavascriptMode.unrestricted,
           javascriptChannels: Set.from([
             JavascriptChannel(
