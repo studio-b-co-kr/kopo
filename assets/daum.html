@@ -6,8 +6,8 @@
 <style>
 html,body{ margin:0; padding:0; height:100%; width:100%; }
 #full-size{
-  height: 100%;
-  width: 100%;
+  height: 200%;
+  width: 200%;
   zoom: 5;
   overflow:hidden; /* or overflow:auto; if you want scrollbars */
 }
@@ -19,16 +19,6 @@ html,body{ margin:0; padding:0; height:100%; width:100%; }
 <script type="text/javascript">
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('full-size');
-
-    function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
 
     daum.postcode.load(function() {
 
@@ -44,9 +34,9 @@ html,body{ margin:0; padding:0; height:100%; width:100%; }
           width : '100%',
           height : '100%',
           maxSuggestItems : 5,
-          alwaysShowEngAddr: getParameterByName('en'),
+          alwaysShowEngAddr: false,
           hideMapBtn: true,
-          hideEngBtn: true,
+          hideEngBtn: false,
       }).embed(element_layer);
 
       // iframe을 넣은 element를 보이게 한다.

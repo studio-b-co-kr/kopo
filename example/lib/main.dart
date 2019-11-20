@@ -33,20 +33,22 @@ class _RootPageState extends State<RootPage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             MaterialButton(
               child: Text('find Korea Postal address'),
               onPressed: () async {
-                String message = await Navigator.push(
+                KopoModel model =
+                    KopoModel.fromJson(jsonDecode(await Navigator.push(
                   context,
                   CupertinoPageRoute(
                     builder: (context) => Kopo(),
                   ),
-                );
-                KopoModel model = KopoModel.fromJson(jsonDecode(message));
-                print(model);
+                )));
+                print(model.toJson());
                 setState(() {
-                  addressJSON = message;
+                  addressJSON =
+                      '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
                 });
               },
             ),

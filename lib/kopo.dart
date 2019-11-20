@@ -31,11 +31,17 @@ class _KopoState extends State<Kopo> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: widget.colour,
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         iconTheme: IconThemeData().copyWith(color: Colors.black),
       ),
       body: WebView(
-          initialUrl: 'https://salondecode.github.io/kopo/assets/daum.html',
+          initialUrl:
+              'https://salondecode.github.io/kopo/assets/daum.html?en=1',
           javascriptMode: JavascriptMode.unrestricted,
           javascriptChannels: Set.from([
             JavascriptChannel(
