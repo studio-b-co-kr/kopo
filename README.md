@@ -25,6 +25,8 @@ with the key `io.flutter.embedded_views_preview` and the value `YES`.
 ## Example
 
 ```dart
+import 'package:kopo/kopo.dart';
+
 MaterialButton(
   child: Text('find Korea Postal address'),
   onPressed: () async {
