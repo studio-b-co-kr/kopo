@@ -30,13 +30,12 @@ import 'package:kopo/kopo.dart';
 MaterialButton(
   child: Text('find Korea Postal address'),
   onPressed: () async {
-    KopoModel model =
-        KopoModel.fromJson(jsonDecode(await Navigator.push(
+    KopoModel model = await Navigator.push(
       context,
       CupertinoPageRoute(
         builder: (context) => Kopo(),
       ),
-    )));
+    );
   },
 ),
 ```
