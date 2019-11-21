@@ -2,7 +2,10 @@ library kopo;
 
 export 'src/kopo_model.dart';
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:kopo/src/kopo_model.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Kopo extends StatefulWidget {
@@ -50,7 +53,8 @@ class KopoState extends State<Kopo> {
                   //javascript code and handle in Flutter/Dart
                   //like here, the message is just being printed
                   //in Run/LogCat window of android studio
-                  Navigator.pop(context, message.message);
+                  Navigator.pop(
+                      context, KopoModel.fromJson(jsonDecode(message.message)));
                 }),
           ]),
           onWebViewCreated: (WebViewController webViewController) async {
