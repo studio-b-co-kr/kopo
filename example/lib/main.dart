@@ -31,29 +31,28 @@ class _RootPageState extends State<RootPage> {
       appBar: AppBar(
         title: Text('Kopo Demo'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            MaterialButton(
-              child: Text('find Korea Postal address'),
-              onPressed: () async {
-                KopoModel model = await Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => Kopo(),
-                  ),
-                );
-                print(model.toJson());
-                setState(() {
-                  addressJSON =
-                      '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
-                });
-              },
-            ),
-            Text('$addressJSON'),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          FlatButton(
+            child: Text('find Korea Postal address'),
+            onPressed: () async {
+              KopoModel model = await Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => Kopo(),
+                ),
+              );
+              print(model.toJson());
+              setState(() {
+                addressJSON =
+                    '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
+              });
+            },
+          ),
+          Text('$addressJSON'),
+        ],
       ),
     );
   }
